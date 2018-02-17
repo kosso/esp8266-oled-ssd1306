@@ -555,6 +555,35 @@ void OLEDDisplay::flipScreenVertically() {
   sendCommand(COMSCANDEC);           //Rotate screen 180 Deg
 }
 
+// @Kosso : Added scrolling. Ported from the Adafruit_SSD1306 library
+void OLEDDisplay::stopscroll(void) {
+  sendCommand(0x2E); // SSD1306_DEACTIVATE_SCROLL
+}
+// To scroll the whole display, run: 
+// display.startscrollright(0x00, 0x0F)
+void OLEDDisplay::startscrollright(uint8_t start, uint8_t stop) {
+  sendCommand(0x26); // SSD1306_RIGHT_HORIZONTAL_SCROLL
+  sendCommand(0X00);
+  sendCommand(start);
+  sendCommand(0X00);
+  sendCommand(stop);
+  sendCommand(0X00);
+  sendCommand(0XFF);
+  sendCommand(0x2F); // SSD1306_ACTIVATE_SCROLL
+}
+// To scroll the whole display, run: 
+// display.startscrollleft(0x00, 0x0F)
+void OLEDDisplay::startscrollleft(uint8_t start, uint8_t stop) {
+  sendCommand(0x27); // SSD1306_LEFT_HORIZONTAL_SCROLL
+  sendCommand(0X00);
+  sendCommand(start);
+  sendCommand(0X00);
+  sendCommand(stop);
+  sendCommand(0X00);
+  sendCommand(0XFF);
+  sendCommand(0x2F); // SSD1306_ACTIVATE_SCROLL
+}
+
 void OLEDDisplay::clear(void) {
   memset(buffer, 0, DISPLAY_BUFFER_SIZE);
 }

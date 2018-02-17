@@ -206,6 +206,12 @@ class OLEDDisplay : public Print {
     // Turn the display upside down
     void flipScreenVertically();
 
+    // @Kosso : Added scrolling. Ported from the Adafruit_SSD1306 library
+    void startscrollright(uint8_t start, uint8_t stop);
+    void startscrollleft(uint8_t start, uint8_t stop);
+    void stopscroll(void);
+
+
     // Write the buffer to the display memory
     virtual void display(void) = 0;
 
