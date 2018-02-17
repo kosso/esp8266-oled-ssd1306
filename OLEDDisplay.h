@@ -211,6 +211,12 @@ class OLEDDisplay : public Print {
     void startscrollleft(uint8_t start, uint8_t stop);
     void stopscroll(void);
 
+    //GoTo function : via @pikolo84 fork.
+    void goTo(uint16_t x, uint16_t y);
+
+    // Via @BadWolf42 fork :  Mirror the display (to be used in a mirror or as a projector)
+    void mirrorScreen();
+    void resetScreen();
 
     // Write the buffer to the display memory
     virtual void display(void) = 0;

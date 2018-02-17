@@ -584,6 +584,25 @@ void OLEDDisplay::startscrollleft(uint8_t start, uint8_t stop) {
   sendCommand(0x2F); // SSD1306_ACTIVATE_SCROLL
 }
 
+// GoTo function : via @pikolo84 fork.
+void OLEDDisplay::goTo(uint16_t x, uint16_t y) {
+  sendCommand(0x3F - y);
+  sendCommand(SETDISPLAYOFFSET);
+  sendCommand(0x00 + x);
+  sendCommand(SETSTARTLINE);
+}
+
+// Mirror screen : via @BadWolf42 fork.
+void OLEDDisplay::mirrorScreen() {
+  sendCommand(SEGREMAP);
+  sendCommand(COMSCANDEC);           
+}
+// Reset screen rotation or mirroring
+void OLEDDisplay::resetScreen() {
+  sendCommand(SEGREMAP);
+  sendCommand(COMSCANINC);           
+}
+
 void OLEDDisplay::clear(void) {
   memset(buffer, 0, DISPLAY_BUFFER_SIZE);
 }
